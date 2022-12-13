@@ -64,15 +64,14 @@ function App() {
       dispatch(removeAllNews())
       
     }
-} , [category, country, API])
+} , [category, country])
 
 useEffect( () => {
   
 
-  if (search) {
+  if (search) { if (search.length >= 4) {
     dispatch(setAPIValueSearch(search))
-  }else  {
-    dispatch(setAPIValueSearch())
+  }
   }
   
   dispatch(fetchNews(API))
@@ -83,7 +82,7 @@ useEffect( () => {
     dispatch(removeAllNews())
     
   }
-} , [search])
+} , [search, API])
 
   return (
     <BrowserRouter>
