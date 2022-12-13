@@ -38,7 +38,7 @@ const readingTime = Math.round(content / 225)
         <img src={singleNews?.urlToImage} alt="article" className='article-image' />
         <p className='article-description'>{singleNews?.description}</p>
 
-        <p className='continue-reading'>Continue reading at <a href={singleNews?.url}>{ singleNews?.source?.name } </a></p>
+        <p className='continue-reading'>Continue reading at <a href={singleNews?.url} target='_blank'>{ singleNews?.source?.name } </a></p>
     </div>
     
     {window.innerWidth >= 768 ?<aside className='aside'>

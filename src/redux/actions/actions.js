@@ -35,7 +35,7 @@ export const fetchLatestNews = () => {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     return async (dispatch, getState ) => {
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=breaking news&from=${year}-${month}-${day}&sortBy=publishedAt&apiKey=c9f379fbce584d1bbb780ff3f3fea407&language=en`)
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=breaking news&from=${year}-${month}-${day}&sortBy=publishedAt&apiKey=e1b9d1fd041645a1aeb497405363fe97&language=en`)
         .catch(err => {console.log('error')})
         response.data.articles.map((article, index) => {
             article.id = index + 1000

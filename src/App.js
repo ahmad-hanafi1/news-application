@@ -31,7 +31,7 @@ function App() {
     async function fetchData() {
       const today = new Date();
       await dispatch(fetchLatestNews())
-      await dispatch(fetchNews(`https://newsapi.org/v2/everything?q=interesting&from=${today.getFullYear()}-${today.getMonth() +1}-${today.getDate()}&sortBy=relevancy&apiKey=c9f379fbce584d1bbb780ff3f3fea407`))
+      await dispatch(fetchNews(`https://newsapi.org/v2/everything?q=interesting&from=${today.getFullYear()}-${today.getMonth() +1}-${today.getDate()}&sortBy=relevancy&apiKey=e1b9d1fd041645a1aeb497405363fe97`))
     }
     fetchData()
     
