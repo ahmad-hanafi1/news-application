@@ -1,12 +1,20 @@
 import './mobileNav.css'
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import logo from "../../../images/logo.png"
 import SearchBox from '../../sharedComponents/searchBox/SearchBox';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCategroyValue } from '../../../redux/actions/actions';
 
 const Navbar = () => {
-
-    console.log(document.getElementById("sidebar"));
+    const dispatch = useDispatch()
+    const { category } =  useParams()
+    useEffect(() => {
+        dispatch(setCategroyValue(category))
+        
+    }, [category]);
+    
     function handleNav() {
             
                 document.getElementById("sidebar").style.width = "100%";
@@ -30,13 +38,13 @@ const Navbar = () => {
                 <span className='search-holder'>h</span>
             </div>
             <div className='categories-scrollable'>
-                <NavLink to='/general' className='nav-category' activeClassName="active">GENERAL</NavLink>
-                <NavLink to='/business' className='nav-category' activeClassName="active">BUSINESS</NavLink>
-                <NavLink to='/sports' className='nav-category' activeClassName="active">SPORTS</NavLink>
-                <NavLink to='/entertainment' className='nav-category' activeClassName="active">ENTERTAINMENT</NavLink>
-                <NavLink to='/health' className='nav-category' activeClassName="active">HEALTH</NavLink>
-                <NavLink to='/science' className='nav-category' activeClassName="active">SCIENCE</NavLink>
-                <NavLink to='/technology' className='nav-category' activeClassName="active">TECHNOLOGY</NavLink>
+                <NavLink to='/general' className='nav-category' activeClassName="active" onClick={() => {dispatch(setCategroyValue(category));}}>GENERAL</NavLink>
+                <NavLink to='/business' className='nav-category' activeClassName="active" onClick={() => {dispatch(setCategroyValue(category));}}>BUSINESS</NavLink>
+                <NavLink to='/sports' className='nav-category' activeClassName="active" onClick={() => {dispatch(setCategroyValue(category));}}>SPORTS</NavLink>
+                <NavLink to='/entertainment' className='nav-category' activeClassName="active" onClick={() => {dispatch(setCategroyValue(category));}}>ENTERTAINMENT</NavLink>
+                <NavLink to='/health' className='nav-category' activeClassName="active" onClick={() => {dispatch(setCategroyValue(category));}}>HEALTH</NavLink>
+                <NavLink to='/science' className='nav-category' activeClassName="active" onClick={() => {dispatch(setCategroyValue(category));}}>SCIENCE</NavLink>
+                <NavLink to='/technology' className='nav-category' activeClassName="active" onClick={() => {dispatch(setCategroyValue(category));}}>TECHNOLOGY</NavLink>
             </div>
         </div>
     );

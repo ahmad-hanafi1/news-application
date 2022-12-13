@@ -13,14 +13,17 @@ const Sidebar = () => {
     const { category } =  useParams()
     const dispatch = useDispatch()
 
-    useEffect( () => {
-        
+    useEffect(() => {
         dispatch(setCategroyValue(category))
-    }, [category, dispatch])
+        
+    }, [category]);
 
+    
     const closeSidebar = () => {
-        document.getElementById('sidebar').style.width = '0';
-        document.getElementById('sidebar').style.opacity = '0';
+        if (window.innerWidth < 700) {
+            document.getElementById('sidebar').style.width = '0';
+            document.getElementById('sidebar').style.opacity = '0';
+        }
     }
     return  (
         <>
@@ -31,13 +34,13 @@ const Sidebar = () => {
                  <h1 className='breaking-news'>NEWS</h1>   
                 </div>
                 <div className='categories'>
-                <NavLink to='/general' className='news-category'  onClick={dispatch(setCategroyValue(category))}>GENERAL</NavLink>
-                <NavLink to='/business' className='news-category' onClick={ dispatch(setCategroyValue(category))}>BUSINESS</NavLink>
-                <NavLink to='/sports' className='news-category' onClick={ dispatch(setCategroyValue(category))}>SPORTS</NavLink>
-                <NavLink to='/entertainment' className='news-category' onClick={ dispatch(setCategroyValue(category))}>ENTERTAINMENT</NavLink>
-                <NavLink to='/health' className='news-category' onClick={ dispatch(setCategroyValue(category))}>HEALTH</NavLink>
-                <NavLink to='/science' className='news-category' onClick={ dispatch(setCategroyValue(category))}>SCIENCE</NavLink>
-                <NavLink to='/technology' className='news-category' onClick={ dispatch(setCategroyValue(category))}>TECHNOLOGY</NavLink>
+                <NavLink to='/general' className='news-category'  onClick={() => {dispatch(setCategroyValue(category)); closeSidebar()}}>GENERAL</NavLink>
+                <NavLink to='/business' className='news-category' onClick={() => {dispatch(setCategroyValue(category)) ; closeSidebar()}}>BUSINESS</NavLink>
+                <NavLink to='/sports' className='news-category' onClick={() => {dispatch(setCategroyValue(category)) ; closeSidebar()}}>SPORTS</NavLink>
+                <NavLink to='/entertainment' className='news-category' onClick={() => {dispatch(setCategroyValue(category)) ; closeSidebar()}}>ENTERTAINMENT</NavLink>
+                <NavLink to='/health' className='news-category' onClick={() => {dispatch(setCategroyValue(category)) ; closeSidebar()}}>HEALTH</NavLink>
+                <NavLink to='/science' className='news-category' onClick={() => {dispatch(setCategroyValue(category)) ; closeSidebar()}}>SCIENCE</NavLink>
+                <NavLink to='/technology' className='news-category' onClick={() => {dispatch(setCategroyValue(category)) ; closeSidebar()}}>TECHNOLOGY</NavLink>
 
                 </div>
 

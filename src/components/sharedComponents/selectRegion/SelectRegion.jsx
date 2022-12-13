@@ -9,10 +9,17 @@ const SelectRegion = () => {
     const [open, setOpen] = useState(false);
 
     const dispatch = useDispatch();
-
+    
+    const closeSidebar = () => {
+        if (window.innerWidth < 700) {
+            document.getElementById('sidebar').style.width = '0';
+            document.getElementById('sidebar').style.opacity = '0';
+        }
+    }
 
     const handleClick = () => {
         setOpen(!open)
+        
     }
     return (
         <div className="select-region" onClick={(handleClick)}> 
@@ -21,8 +28,12 @@ const SelectRegion = () => {
                     <ul className="menu">
                     <li className="menu-item">
                         <button onClick={() => { 
-                                dispatch(setCountryValue(''))
-                                setOpen(!open)
+                                dispatch(setCountryValue('international'))
+                                setOpen(!open) 
+                                if (window.innerWidth < 700) {
+                                    document.getElementById('sidebar').style.width = '0';
+                                    document.getElementById('sidebar').style.opacity = '0';
+                                }
                             }} >Int</button>
                         
                         </li>    
@@ -30,6 +41,10 @@ const SelectRegion = () => {
                         <button onClick={() => { 
                                 dispatch(setCountryValue('us'))
                                 setOpen(!open)
+                                if (window.innerWidth < 700) {
+                                    document.getElementById('sidebar').style.width = '0';
+                                    document.getElementById('sidebar').style.opacity = '0';
+                                }
                             }} >USA</button>
                     
                     </li>
@@ -37,24 +52,36 @@ const SelectRegion = () => {
                         <button onClick={() => { 
                              dispatch(setCountryValue('turkey'))
                              setOpen(!open)
+                             if (window.innerWidth < 700) {
+                                document.getElementById('sidebar').style.width = '0';
+                                document.getElementById('sidebar').style.opacity = '0';
+                            }
                         }}>Turkey</button>
                     </li>
                     <li className="menu-item">
                         <button onClick={() => { 
                              dispatch(setCountryValue('russia'))
                              setOpen(!open)
+                             if (window.innerWidth < 700) {
+                                document.getElementById('sidebar').style.width = '0';
+                                document.getElementById('sidebar').style.opacity = '0';
+                            }
                         }}>Russia</button>
                     </li>
                     <li className="menu-item">
                         <button onClick={() => { 
                              dispatch(setCountryValue('australia'))
                              setOpen(!open)
+                             if (window.innerWidth < 700) {
+                                document.getElementById('sidebar').style.width = '0';
+                                document.getElementById('sidebar').style.opacity = '0';
+                            }
                         }}>Australia</button>
                     </li>
                     </ul>
                 ) : null 
                 }
-                <p className="selected-region">{countryValue === 'us' ? 'USA' : countryValue === 'tr' ? "Turkey" : countryValue === 'ru' ? 'Russia' : countryValue === 'au' ? 'Australia': 'Int'}</p> 
+                <p className="selected-region">{countryValue === 'us' ? 'USA' : countryValue === 'turkey' ? "Turkey" : countryValue === 'russia' ? 'Russia' : countryValue === 'australia' ? 'Australia': 'Int'}</p> 
             </div>
     );
 }

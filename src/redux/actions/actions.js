@@ -35,7 +35,7 @@ export const fetchLatestNews = () => {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     return async (dispatch, getState ) => {
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=breaking news&from=${year}-${month}-${day}&sortBy=publishedAt&apiKey=2a25e35c43d64e2b93904f5128daca9b&language=en`)
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=breaking news&from=${year}-${month}-${day}&sortBy=publishedAt&apiKey=c9f379fbce584d1bbb780ff3f3fea407&language=en`)
         .catch(err => {console.log('error')})
         response.data.articles.map((article, index) => {
             article.id = index + 1000
@@ -71,10 +71,10 @@ export const setLatestNewsId = () => {
 
 
 
-export const setAPIValue = (category= 'general', countryValue='us') => {
+export const setAPIValue = (category= 'general', countryValue='international') => {
     return {
         type: actionTypes.SET_API_VALUE,
-        payload: {countryValue: countryValue, categoryValue: category, }
+        payload: { categoryValue: category, countryValue: countryValue,}
     }
 }
 

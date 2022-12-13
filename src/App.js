@@ -31,34 +31,40 @@ function App() {
     async function fetchData() {
       const today = new Date();
       await dispatch(fetchLatestNews())
-      await dispatch(fetchNews(`https://newsapi.org/v2/everything?q=interesting&from=${today.getFullYear()}-${today.getMonth() +1}-${today.getDate()}&sortBy=relevancy&apiKey=2a25e35c43d64e2b93904f5128daca9b`))
+      await dispatch(fetchNews(`https://newsapi.org/v2/everything?q=interesting&from=${today.getFullYear()}-${today.getMonth() +1}-${today.getDate()}&sortBy=relevancy&apiKey=c9f379fbce584d1bbb780ff3f3fea407`))
     }
     fetchData()
     
     return () => {
       dispatch(removeAllNews())
     }
-} , [dispatch])
+} , [])
 
 
 
   useEffect( () => {
     
-    if (country && category) {
-      dispatch(setAPIValue(category, country))
-    }
-    else {
-      dispatch(setAPIValue())
+    if ( category && !country) {
+      dispatch(setAPIValue(category, 'international'))
+      dispatch(fetchNews(API))
+    }else if (country && !category) {
+      dispatch(setAPIValue('general', country ))
+      dispatch(fetchNews(API))
+
+    }else {
+      dispatch(setAPIValue(category, country ))
+      dispatch(fetchNews(API))
     }
     
-    dispatch(fetchNews(API))
+    
+    
   
 
     return () => {
       dispatch(removeAllNews())
       
     }
-} , [category, country])
+} , [category, country, API])
 
 useEffect( () => {
   
@@ -77,7 +83,7 @@ useEffect( () => {
     dispatch(removeAllNews())
     
   }
-} , [search, API])
+} , [search])
 
   return (
     <BrowserRouter>
