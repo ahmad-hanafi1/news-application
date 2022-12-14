@@ -1,75 +1,47 @@
 import { actionTypes } from "../actionTypes/actionTypes";
 import axios from 'axios';
 
+export const fetchNews = (API) => (dispatch) => {
+    axios.get(API)
+        .then(response => {
+            response.data.articles.map((article, index) => {
+                article.id = index
+                return article
+            })
 
-const APIKEY = "2a25e35c43d64e2b93904f5128daca9b"
-
-
-export async function addAllNews() {
-
-     
+            dispatch( {
+                type: actionTypes.FETCH_NEWS,
+                payload: response.data,
+            })
+        })
+        .catch(console.log)
 }
 
-export const fetchNews = (API) => {
-
-    return async (dispatch, getState ) => {
-        const response = await axios.get(API)
-        .catch(err => {console.log('error')})
-        
-        response.data.articles.map((article, index) => {
-            article.id = index 
-            return article
-        })
-
-        dispatch( {
-            type: actionTypes.FETCH_NEWS,
-            payload: response.data,
-        })
-    }
-}
-
-export const fetchLatestNews = () => {
+export const fetchLatestNews = () => (dispatch) => {
     const date = new Date();
     date.setDate(date.getDate())
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    return async (dispatch, getState ) => {
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=breaking news&from=${year}-${month}-${day}&sortBy=publishedAt&apiKey=e1b9d1fd041645a1aeb497405363fe97&language=en`)
-        .catch(err => {console.log('error')})
-        response.data.articles.map((article, index) => {
-            article.id = index + 1000
-            return article
-        })
-        dispatch( {
-            type: actionTypes.FETCH_LATEST_NEWS,
-            payload: response.data,
-        })
-    }
+        axios.get(`https://newsapi.org/v2/everything?q=breaking%20news&from=${year}-${month}-${day}&sortBy=publishedAt&apiKey=e1b9d1fd041645a1aeb497405363fe97&language=en`)
+            .then(response => {
+                response.data.articles.map((article, index) => {
+                    article.id = index + 1000
+                    return article
+                })
+                dispatch( {
+                    type: actionTypes.FETCH_LATEST_NEWS,
+                    payload: response.data,
+                })
+            })
+            .catch(console.log)
 }
-// const response = await axios.get(`https://newsapi.org/v2/everything?from=${year}-${month}-${day}&sortBy=popularity&apiKey=${APIKEY}`)
-
 
 export const removeAllNews = () => {
     return {
         type: actionTypes.REMOVE_ALL_NEWS,
     }
 }
-
-export const setNewsId = () => {
-    return {
-        type: actionTypes.SET_NEWS_ID
-    }
-}
-
-export const setLatestNewsId = () => {
-    return {
-        type: actionTypes.SET_LATESTNEWS_ID
-    }
-}
-
-
-
 
 export const setAPIValue = (category= 'general', countryValue='international') => {
     return {
